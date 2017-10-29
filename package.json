@@ -1,0 +1,30 @@
+{
+  "name": "fcc-polling-app",
+  "version": "1.0.0",
+  "description": "A polling app for FreeCodeCamp",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/nodemon/bin/nodemon.js index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/abialbon/fcc-polling-app.git"
+  },
+  "keywords": [
+    "React",
+    "Node",
+    "MongoDB"
+  ],
+  "author": "Abialbon Paul",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abialbon/fcc-polling-app/issues"
+  },
+  "homepage": "https://github.com/abialbon/fcc-polling-app#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}
