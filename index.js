@@ -6,7 +6,7 @@ const passport = require('passport');
 
 // Database connection
 const dbConnection = require('./server/models/dbConnection');
-dbConnection.connect('mongodb://abialbon:a3s4d5@ds143245.mlab.com:43245/pollace')
+dbConnection.connect(process.env.db_URL);
 
 // Static resources
 app.use(express.static(path.join(__dirname, '/server/static')))
