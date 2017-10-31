@@ -4,7 +4,8 @@
   "description": "A polling app for FreeCodeCamp",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/nodemon/bin/nodemon.js index.js"
+    "start": "./node_modules/nodemon/bin/nodemon.js index.js",
+    "test": "./node_modules/mocha/bin/mocha --recursive"
   },
   "repository": {
     "type": "git",
@@ -22,9 +23,16 @@
   },
   "homepage": "https://github.com/abialbon/fcc-polling-app#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongoose": "^4.12.5",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "validator": "^9.1.1"
   },
   "devDependencies": {
-    "nodemon": "^1.12.1"
+    "mocha": "^4.0.1",
+    "nodemon": "^1.12.1",
+    "supertest": "^3.0.0"
   }
 }

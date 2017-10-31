@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const isEmail = require('validator/lib/isEmail');
+const passport = require('passport');
 
-router.post('/signup', (req, res) => {
+router.post('/signup', (req, res, next) => {
 
   // Server side form validation
   let { name, email, password } = req.body;
@@ -20,6 +21,14 @@ router.post('/signup', (req, res) => {
   if (message.name || message.email || message.password) {
     res.send(message);
   } 
+
+  return passport.authenticate('local-signup', (err, user) => {
+
+    // TODO: Add error for duplicate email
+    if (err) res.send({ error: err.message });
+    if (!err) res.send({ success: true });
+
+  }) (req, res, next) // passport.authenticate
 
 })
 

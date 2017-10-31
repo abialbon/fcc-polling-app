@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 
 // Database connection
 const dbConnection = require('./server/models/dbConnection');
@@ -13,6 +14,11 @@ app.use(express.static(path.join(__dirname, '/client/dist')))
 
 // Body-parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Passport configuration
+app.use(passport.initialize());
+const signupStrategy = require('./server/passport/local-signup');
+passport.use('local-signup', signupStrategy);
 
 //Routes setup
 const authRoutes = require('./server/routes/auth');
