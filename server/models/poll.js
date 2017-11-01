@@ -1,16 +1,15 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const pollSchema = mongoose.Schema({
+const pollSchema = new Schema({
   stem: String,
-  options: [{
-    option: String,
-    votes: {
-      type: Number,
-      default: 0
-    }
-  }],
+  options: [[String]],
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'user'
+  },
   votedUsers: [{
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'user'
   }],
   votedIp: [String]
