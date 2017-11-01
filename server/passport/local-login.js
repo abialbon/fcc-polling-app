@@ -8,8 +8,6 @@ const loginCallback = (email, password, done) => {
   email = email.trim();
   password = password.trim();
 
-  console.log(email, password);
-
   const invalidError = new Error('Incorrect email or password')
 
   User.findOne({ email })

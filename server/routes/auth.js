@@ -42,14 +42,14 @@ router.post('/login', (req, res, next) => {
   email = email.trim();
   if (!isEmail(email)) {
     // TODO: Set the error status code
-    res.send({ error: 'Invalid Email' }).end();
+    res.send({ success: false, error: 'Invalid Email' }).end();
     return;
   }
 
   return passport.authenticate('local-login', (err, token, user) => {
     if (err) {
       // TODO: Set the error status code
-      res.send({ error: err.message }).end()
+      res.send({ success: false, error: err.message }).end()
       return;
     }
     const response = {
