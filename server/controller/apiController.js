@@ -8,14 +8,16 @@ const createPoll = (req, res) => {
   options.splice(i, 1);
   const pollOptions = [];
   for (let i = 0; i < options.length; i++) {
-    pollOptions[i] = [req.body[options[i]], 0]
+    let newoption = {
+      option: req.body[options[i]]
+    }
+    pollOptions.push(newoption);
   }
   const newPoll = new Poll({
     stem: req.body.stem,
     options: pollOptions,
     author: req.userid
   });
-  console.log(pollOptions);
 
   newPoll.save()
     .then(() => res.send({ success: true }))

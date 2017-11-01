@@ -3,7 +3,13 @@ const Schema = mongoose.Schema;
 
 const pollSchema = new Schema({
   stem: String,
-  options: [[String]],
+  options: [{
+    option: String,
+    votes: {
+      type: Number,
+      default: 0
+    }
+  }],
   author: {
     type: Schema.Types.ObjectId,
     ref: 'user'
