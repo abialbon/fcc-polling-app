@@ -20,16 +20,44 @@ router.post('/signup', (req, res, next) => {
   // if any of these is true send message
   if (message.name || message.email || message.password) {
     res.send(message);
+    return;
   } 
 
   return passport.authenticate('local-signup', (err, user) => {
 
     // TODO: Add error for duplicate email
-    if (err) res.send({ error: err.message });
-    if (!err) res.send({ success: true });
+    if (err) {
+      res.send({ error: err.message }).end();
+      return;
+    }
+    res.send({ success: true }).end()
 
   }) (req, res, next) // passport.authenticate
 
+})
+
+router.post('/login', (req, res, next) => {
+  // Server side form validation
+  let { email } = req.body;
+  email = email.trim();
+  if (!isEmail(email)) {
+    // TODO: Set the error status code
+    res.send({ error: 'Invalid Email' }).end();
+    return;
+  }
+
+  return passport.authenticate('local-login', (err, token, user) => {
+    if (err) {
+      // TODO: Set the error status code
+      res.send({ error: err.message }).end()
+      return;
+    }
+    const response = {
+      token,
+      user
+    }
+    res.send(response);
+  }) (req, res, next) // passport.authenticate
 })
 
 module.exports = router;

@@ -18,7 +18,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Passport configuration
 app.use(passport.initialize());
 const signupStrategy = require('./server/passport/local-signup');
+const loginStrategy = require('./server/passport/local-login');
 passport.use('local-signup', signupStrategy);
+passport.use('local-login', loginStrategy);
 
 //Routes setup
 const authRoutes = require('./server/routes/auth');
