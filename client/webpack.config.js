@@ -6,7 +6,7 @@ const extractPlugin = new textExtractPlugin({
 });
 
 module.exports = {
-  entry: './src/App.js',
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',

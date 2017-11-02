@@ -28,9 +28,13 @@ app.use('/auth', authRoutes);
 const apiRoutes = require('./server/routes/api');
 app.use('/api', apiRoutes);
 
+app.get('/*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'server/static/index.html'));
+})
+
 
 app.listen(3000, '127.0.0.1', () => {
   console.log('The server has started!');
 });
 
-module.exports = app;
+// module.exports = app;
