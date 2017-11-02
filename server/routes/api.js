@@ -3,6 +3,10 @@ const router = express.Router();
 const apiController = require('../controller/apiController');
 const authCheck = require('../middleware/authCheck');
 
+router.get('/polls', apiController.getAllPolls);
+router.get('/polls/:id', apiController.showAPoll);
+
+router.get('/polls/user/:user', authCheck, apiController.showUserPolls);
 router.post('/polls', authCheck, apiController.createPoll);
 router.post('/polls/:id', authCheck, apiController.votePoll);
 router.put('/polls/:id', authCheck, apiController.addOption);

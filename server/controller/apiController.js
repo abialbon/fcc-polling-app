@@ -2,6 +2,30 @@ const mongoose = require('mongoose');
 const Poll = mongoose.model('poll');
 const User = mongoose.model('user');
 
+const getAllPolls = (req, res) => {
+  const offset = parseInt(req.query.offset) || 0;
+  Poll.find({})
+    .skip(offset)
+    .limit(20)
+    .then(polls => res.send({ success: true, data: polls }))
+    .catch(err => res.send({ success: false, error: err.message }))
+}
+
+const showUserPolls = (req, res) => {
+  const userID = req.params.user;
+  User.findById(userID)
+    .populate('polls')
+    .then(user => res.send({ success: true, data: user }))
+    .catch(err => res.send({ success: false, error: err.message }))
+}
+
+const showAPoll = (req, res) => {
+  const pollID = req.params.id;
+  Poll.findById(pollID)
+    .then(poll => res.send({ success: true, data: poll }).end())
+    .catch(err => res.send({ success: false, error: err.message }))
+}
+
 const createPoll = (req, res) => {
   // get the options from the request
   let options = Object.keys(req.body);
@@ -52,7 +76,6 @@ const votePoll = (req, res) => {
 }
 
 const deletePoll = (req, res) => {
-  // TODO: Remove the poll id from the User model
   const pollID = req.params.id;
   Poll.findById(pollID)
     .then(poll => {
@@ -77,6 +100,9 @@ const addOption = (req, res) => {
 }
 
 module.exports = {
+  getAllPolls,
+  showUserPolls,
+  showAPoll,
   createPoll,
   votePoll,
   addOption,
