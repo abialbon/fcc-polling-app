@@ -51,7 +51,34 @@ const votePoll = (req, res) => {
     })
 }
 
+const deletePoll = (req, res) => {
+  // TODO: Remove the poll id from the User model
+  const pollID = req.params.id;
+  Poll.findById(pollID)
+    .then(poll => {
+      poll.remove()
+      .then(() => res.send({ success: true }))
+      .catch(err => res.send({ success: false, error: err.message }))
+    })
+}
+
+const addOption = (req, res) => {
+  // Receives an option as req.body.option
+  const pollID = req.params.id;
+  const newOption = req.body.option;
+  Poll.update({ _id: pollID },
+    { $addToSet: { options: { option: newOption } } })
+    .then(() => {
+      res.send({ success: true }).end();
+    })
+    .catch(err => {
+      res.send({ success: false, error: err.message }).end()
+    })
+}
+
 module.exports = {
   createPoll,
-  votePoll
+  votePoll,
+  addOption,
+  deletePoll
 };

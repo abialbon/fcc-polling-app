@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const User = require('./user');
 
 const pollSchema = new Schema({
   stem: String,
@@ -20,5 +21,11 @@ const pollSchema = new Schema({
   }],
   votedIp: [String]
 });
+
+pollSchema.pre('remove', function(next) {
+  User.findByIdAndUpdate(this.author,
+    { $pull: { polls: this._id }})
+    .then(() => next())
+})
 
 module.exports = mongoose.model('poll', pollSchema);
