@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Poll = mongoose.model('poll');
+const User = mongoose.model('user');
 
 const createPoll = (req, res) => {
   // get the options from the request
@@ -20,7 +21,11 @@ const createPoll = (req, res) => {
   });
 
   newPoll.save()
-    .then(() => res.send({ success: true }))
+    .then(poll => {
+      User.findByIdAndUpdate(req.userid,
+       { $push: { polls:  poll._id} })
+        .then(() => res.send({ success: true }))
+    })
     .catch(err => res.send({ success: false, error: err.name }))
 }
 
