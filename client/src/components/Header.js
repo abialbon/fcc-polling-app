@@ -1,15 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+import '../styles/Header.scss';
+import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
+
+const Header = (props) => {
   return (
-    <div>
-      <p>This is the header component</p>
-      <Link to="/signup">Signup</Link>
-      <Link to="/login">Login</Link>
-      <Link to="/polls">Polls</Link>
-      <Link to="/dashboard">Dashboard</Link>
-    </div>
+    <AppBar 
+    onTitleTouchTap = { () =>  props.history.push('/') }
+    className="appbar" 
+    title="PollAce">
+      <div className="header-list">
+        <FlatButton onClick={ () => props.history.push('/signup') } label="SIGNUP"/>
+        <FlatButton onClick={ () => props.history.push('/login') } label="LOGIN"/>
+        <FlatButton label="LOGOUT"/>
+      </div>
+    </AppBar>
   )
 }
 

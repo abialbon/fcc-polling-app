@@ -14,8 +14,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header/>
 
+        <Route path='/' component={ Header } />
         <Route exact path='/' component={ LandingPage } />
         <Route exact path='/signup' component={ Signup } />
         <Route exact path='/login' component={ Login } />

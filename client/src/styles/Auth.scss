@@ -1,0 +1,23 @@
+.auth-container {
+  width: 100%;
+  height: calc(100vh - 64px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  form {
+    width: 320px;
+    padding: 20px;
+    h1 {
+      text-align: center;
+    }
+  }
+  .form-field {
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.signup-button {
+  margin-top: 10px;
+}
