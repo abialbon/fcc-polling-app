@@ -1,0 +1,23 @@
+.dashboard {
+  width: 100%;
+  &-welcome{
+    background-image: url('/assets/pattern.svg');
+    text-align: center;
+    color: white;
+    h1 {
+      padding-top: 100px;
+      padding-bottom: 20px;
+      margin: 0;
+    }
+    &--buttons {
+      padding-bottom: 30px;
+      button:first-child {
+        margin-right: 10px !important;
+      }
+    }
+  }
+}
+
+.poll-area {
+  padding: 20px;
+}

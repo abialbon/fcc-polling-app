@@ -13,7 +13,7 @@ const Header = (props) => {
     title="PollAce">
       <div className="header-list">
         <FlatButton onClick={ () => props.history.push('/signup') } label="SIGNUP"/>
-        <FlatButton onClick={ () => props.history.push('/login') } label="LOGIN"/>
+        <FlatButton onClick={ () => props.history.push('/poll/12') } label="LOGIN"/>
         <FlatButton label="LOGOUT"/>
       </div>
     </AppBar>
