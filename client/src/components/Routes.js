@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
+
+import Auth from '../modules/clientAuth';
 
 import Header from './Header';
 import LandingPage from './LandingPage';
@@ -20,6 +22,16 @@ const RouteData = ({ component: Component, ...rest }) => (
   <Route { ...rest } render={ props=> (
     <Component { ...props } { ...rest }/>
   ) } />
+)
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route { ...rest } render={ props => (
+    Auth.isAuthenticated() ? (
+      <Component {...props} {...rest} />
+    ) : (
+      <Redirect to={{ pathname: '/login' }} />
+    )
+  )} />
 )
 
 // ***********************
@@ -53,7 +65,7 @@ const Routes = ({
 
   <Route exact path='/polls' component={ AllPolls } />
 
-  <RouteData exact path='/dashboard' component={ Dashboard } 
+  <PrivateRoute exact path='/dashboard' component={ Dashboard } 
   user={ user }/>
 
   <Route exact path={'/addpoll'} component={ AddPoll } />

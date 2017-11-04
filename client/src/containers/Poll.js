@@ -3,9 +3,11 @@ import React from 'react';
 const request = require('superagent');
 import Pie from './Pie';
 
+import '../styles/Poll.scss';
 import { Card, CardHeader, CardMedia, CardTitle, CardText, CardActions } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import { lightBlueA400, redA400 } from 'material-ui/styles/colors';
 
 export default class Poll extends React.Component {
   constructor(props) {
@@ -49,6 +51,7 @@ export default class Poll extends React.Component {
 
   render() {
     return (
+      <div className="poll-container">
       <Card>
         <CardHeader
         title={ this.state.authorName }
@@ -66,13 +69,22 @@ export default class Poll extends React.Component {
                 this.state.pollOptions.map((x, i) => <RadioButton key={ i } value={ this.state.voteID[i] } label={ x } />)
               }
             </RadioButtonGroup>
-            <FlatButton label="Vote"/>
+            <FlatButton 
+            className="poll-vote" 
+            label="Vote"
+            backgroundColor={ lightBlueA400 }
+            />
           </form>
         </CardText>
         <CardActions>
-          <FlatButton label="Delete"/>
+          <FlatButton 
+          className="poll-delete" 
+          label="Delete"
+          backgroundColor={ redA400 }
+          />
         </CardActions>
       </Card>
+      </div>
     )
   }
 }

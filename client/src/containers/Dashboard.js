@@ -55,6 +55,8 @@ export default class Dashboard extends React.Component {
             this.state.polls.map((poll, i) => (
             <PollCard 
             key={ i }
+            history={ this.props.history }
+            pollID={ poll._id }
             name={ poll.authorName } 
             stem={ poll.stem }
             />

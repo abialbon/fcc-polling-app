@@ -5,7 +5,7 @@ export default class Auth {
 
   static isAuthenticated() {
     let token = localStorage.getItem('app_token')
-    if (token === 'null') {
+    if (token === 'null' || undefined) {
       return false;
     } else {
       return true;
