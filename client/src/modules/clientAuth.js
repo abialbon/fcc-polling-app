@@ -4,15 +4,15 @@ export default class Auth {
   }
 
   static isAuthenticated() {
-    let token = localStorage.getItem('app_taken')
-    if (!token) {
+    let token = localStorage.getItem('app_token')
+    if (token === 'null') {
       return false;
     } else {
       return true;
     }
   }
 
-  static logOut() {
-    localStorage.setItem('app_token', null);
+  static logout() {
+    localStorage.setItem('app_token', 'null');
   }
 }

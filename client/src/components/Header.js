@@ -29,7 +29,7 @@ const Header = (props) => {
 
         {
           props.authenticated && 
-          <FlatButton label="LOGOUT"/>
+          <FlatButton label="LOGOUT" onClick={ props.logout }/>
         }
         
         

@@ -25,18 +25,36 @@ const RouteData = ({ component: Component, ...rest }) => (
 
 
 const Routes = ({
+  user,
   authenticated,
   message,
-  setMessage
+  setMessage,
+  userAuthenticate,
+  logout
 }) => (
 
   <div>
-  <RouteData path="/" component={ Header } authenticated={ authenticated } />
+  <RouteData path="/" component={ Header } 
+  authenticated={ authenticated } 
+  logout={ logout }
+  />
+
   <Route exact path='/' component={ LandingPage } />
+
   <RouteData exact path='/signup' component={ Signup } setMessage={ setMessage }/>
-  <RouteData exact path='/login' component={ Login } authenticated={ authenticated } setMessage={ setMessage } message={ message }/>
+  
+  <RouteData exact path='/login' component={ Login } 
+  authenticated={ authenticated } 
+  setMessage={ setMessage } 
+  message={ message }
+  userAuthenticate={ userAuthenticate }
+  />
+
   <Route exact path='/polls' component={ AllPolls } />
-  <Route exact path='/dashboard' component={ Dashboard } />
+
+  <RouteData exact path='/dashboard' component={ Dashboard } 
+  user={ user }/>
+
   <Route exact path={'/poll/:id'} component={ Poll } />
   </div>
 

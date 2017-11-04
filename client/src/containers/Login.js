@@ -1,5 +1,6 @@
 import React from 'react';
 const request = require('superagent');
+import Auth from '../modules/clientAuth';
 
 import '../styles/Auth.scss';
 import LoginForm from '../components/LoginForm';
@@ -28,6 +29,11 @@ export default class Login extends React.Component {
               color: redA700,
               text: res.body.error
             })
+          } else {
+            console.log(res.body);
+            Auth.authenticate(res.body.token);
+            this.props.userAuthenticate(res.body.user);
+            this.props.history.push('/dashboard');
           }
         })
     }

@@ -53,7 +53,11 @@ router.post('/login', (req, res, next) => {
     }
     const response = {
       token,
-      user
+      user : {
+        _id: user._id,
+        name: user.name,
+        email: user.email 
+      }
     }
     res.send(response);
   }) (req, res, next) // passport.authenticate

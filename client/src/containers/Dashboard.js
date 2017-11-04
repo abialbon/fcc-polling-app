@@ -31,7 +31,7 @@ export default class Dashboard extends React.Component {
     return (
       <div className="dashboard">
         <div className="dashboard-welcome">
-          <h1>Hello, User</h1>
+          <h1>Hello, { this.props.user.name }</h1>
           <div className="dashboard-welcome--buttons">
             <FlatButton 
             onClick={ () => this.props.history.push('/polls') }
