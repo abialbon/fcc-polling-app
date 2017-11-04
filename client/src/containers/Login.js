@@ -30,7 +30,6 @@ export default class Login extends React.Component {
               text: res.body.error
             })
           } else {
-            console.log(res.body);
             Auth.authenticate(res.body.token);
             this.props.userAuthenticate(res.body.user);
             this.props.history.push('/dashboard');

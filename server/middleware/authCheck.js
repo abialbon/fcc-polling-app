@@ -18,6 +18,7 @@ const authCheck = (req, res, next) => {
     User.findById(userId)
       .then(user => {
         req.userid = user._id;
+        req.username = user.name;
         next();
       })
       .catch(err => {

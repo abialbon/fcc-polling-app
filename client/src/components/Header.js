@@ -24,7 +24,7 @@ const Header = (props) => {
 
         {
           !props.authenticated && 
-          <FlatButton onClick={ () => props.history.push('/poll/12') } label="LOGIN"/>
+          <FlatButton onClick={ () => props.history.push('/login') } label="LOGIN"/>
         }
 
         {

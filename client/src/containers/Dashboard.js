@@ -1,5 +1,7 @@
 import React from 'react';
 
+const request = require('superagent');
+import Auth from '../modules/clientAuth';
 import PollCard from '../components/PollCard';
 
 import '../styles/Dashboard.scss';
@@ -16,15 +18,15 @@ export default class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/data/allposts.json')
-      .then(res => res.json())
-      .then(data => {
+    const token = Auth.getToken();
+    request
+      .get(`api/polls/user/${this.props.user._id}`)
+      .set('Authorization', `Bearer ${token}`)
+      .end((err, res) => {
         this.setState({
-          polls: data.data
-        });
+          polls: res.body.data
+        })
       })
-      .catch(err => console.log(err.message))
-
   }
 
   render() {
@@ -43,6 +45,7 @@ export default class Dashboard extends React.Component {
             backgroundColor={ redA400 }
             labelStyle={{ color: 'white'}} 
             label="Add a new Poll" 
+            onClick={ () => this.props.history.push('/addpoll') }
             />
           </div>
         </div>
@@ -52,7 +55,7 @@ export default class Dashboard extends React.Component {
             this.state.polls.map((poll, i) => (
             <PollCard 
             key={ i }
-            name={ poll.author } 
+            name={ poll.authorName } 
             stem={ poll.stem }
             />
           ))

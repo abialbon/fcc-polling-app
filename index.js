@@ -23,7 +23,7 @@ const loginStrategy = require('./server/passport/local-login');
 passport.use('local-signup', signupStrategy);
 passport.use('local-login', loginStrategy);
 
-//Routes setup
+// Routes setup
 const authRoutes = require('./server/routes/auth');
 app.use('/auth', authRoutes);
 const apiRoutes = require('./server/routes/api');

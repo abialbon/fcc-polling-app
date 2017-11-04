@@ -15,6 +15,7 @@ const pollSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'user'
   },
+  authorName: String,
   votedUsers: [{
     type: Schema.Types.ObjectId,
     ref: 'user'

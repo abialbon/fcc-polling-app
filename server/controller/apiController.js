@@ -15,7 +15,7 @@ const showUserPolls = (req, res) => {
   const userID = req.params.user;
   User.findById(userID)
     .populate('polls')
-    .then(user => res.send({ success: true, data: user }))
+    .then(user => res.send({ success: true, data: user.polls }))
     .catch(err => res.send({ success: false, error: err.message }))
 }
 
@@ -41,7 +41,8 @@ const createPoll = (req, res) => {
   const newPoll = new Poll({
     stem: req.body.stem,
     options: pollOptions,
-    author: req.userid
+    author: req.userid,
+    authorName: req.username
   });
 
   newPoll.save()

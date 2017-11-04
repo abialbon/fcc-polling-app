@@ -1,0 +1,20 @@
+.addpoll-container {
+  width: 80%;
+  margin:auto;
+  padding: 20px;
+  form {
+    padding: 20px;
+  }
+}
+
+.options-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-field {
+  margin-top: 20px;
+  .option {
+    margin-right: 10px;
+  }
+}

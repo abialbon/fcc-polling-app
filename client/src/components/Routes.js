@@ -10,6 +10,7 @@ import Login from '../containers/Login';
 import AllPolls from '../containers/AllPolls';
 import Poll from '../containers/Poll';
 import Dashboard from '../containers/Dashboard';
+import AddPoll from '../containers/AddPoll';
 
 // ***********************
 // Wrapped route components
@@ -55,7 +56,10 @@ const Routes = ({
   <RouteData exact path='/dashboard' component={ Dashboard } 
   user={ user }/>
 
+  <Route exact path={'/addpoll'} component={ AddPoll } />
+
   <Route exact path={'/poll/:id'} component={ Poll } />
+
   </div>
 
 )

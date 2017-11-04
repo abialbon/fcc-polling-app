@@ -12,6 +12,10 @@ export default class Auth {
     }
   }
 
+  static getToken() {
+    return localStorage.getItem('app_token');
+  }
+
   static logout() {
     localStorage.setItem('app_token', 'null');
   }
