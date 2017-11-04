@@ -4,7 +4,7 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-const SignupForm = ({ onChange, onSubmit }) => (
+const SignupForm = ({ onChange, onSubmit, errors }) => (
   <Paper>
   <form method="POST" action="/" onSubmit={ onSubmit } >
     <h1>Welcome to PollAce</h1>
@@ -14,6 +14,7 @@ const SignupForm = ({ onChange, onSubmit }) => (
       floatingLabelText="Name"
       fullWidth={ true }
       onChange={ onChange }
+      errorText={ errors.name }
       />
     </div>
     <div className="form-field">
@@ -22,6 +23,7 @@ const SignupForm = ({ onChange, onSubmit }) => (
       floatingLabelText="Email"
       fullWidth={ true }
       onChange={ onChange }
+      errorText={ errors.email }
       />
     </div>
     <div className="form-field">
@@ -31,6 +33,7 @@ const SignupForm = ({ onChange, onSubmit }) => (
       type="password"
       fullWidth={ true }
       onChange={ onChange }
+      errorText={ errors.password }
       />
     </div>
     <div className="form-field">

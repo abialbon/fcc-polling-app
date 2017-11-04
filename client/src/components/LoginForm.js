@@ -4,11 +4,14 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-const LoginForm = ({ onChange, onSubmit }) => (
+const LoginForm = ({ onChange, onSubmit, message }) => (
   <div className="auth-container">
     <Paper>
       <form action="/" method="POST" onSubmit={ onSubmit }>
         <h1>Login</h1>
+        {
+          message.text && <div style={{ color: message.color }} className="status-text">{ message.text }</div>
+        }
         <div className="form-field">
           <TextField 
           name="email"

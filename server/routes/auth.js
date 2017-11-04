@@ -4,7 +4,6 @@ const isEmail = require('validator/lib/isEmail');
 const passport = require('passport');
 
 router.post('/signup', (req, res, next) => {
-
   // Server side form validation
   let { name, email, password } = req.body;
   name     = name.trim();

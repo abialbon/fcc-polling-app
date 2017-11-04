@@ -15,9 +15,9 @@ import Dashboard from '../containers/Dashboard';
 // Wrapped route components
 // ***********************
 
-const HeaderData = ({ component: Component, authenticated, ...rest }) => (
+const RouteData = ({ component: Component, ...rest }) => (
   <Route { ...rest } render={ props=> (
-    <Component { ...props } authenticated={ authenticated }/>
+    <Component { ...props } { ...rest }/>
   ) } />
 )
 
@@ -25,14 +25,16 @@ const HeaderData = ({ component: Component, authenticated, ...rest }) => (
 
 
 const Routes = ({
-  authenticated
+  authenticated,
+  message,
+  setMessage
 }) => (
 
   <div>
-  <HeaderData path="/" component={ Header } authenticated={ authenticated } />
+  <RouteData path="/" component={ Header } authenticated={ authenticated } />
   <Route exact path='/' component={ LandingPage } />
-  <Route exact path='/signup' component={ Signup } />
-  <Route exact path='/login' component={ Login } />
+  <RouteData exact path='/signup' component={ Signup } setMessage={ setMessage }/>
+  <RouteData exact path='/login' component={ Login } authenticated={ authenticated } setMessage={ setMessage } message={ message }/>
   <Route exact path='/polls' component={ AllPolls } />
   <Route exact path='/dashboard' component={ Dashboard } />
   <Route exact path={'/poll/:id'} component={ Poll } />
