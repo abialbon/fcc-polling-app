@@ -1,36 +1,31 @@
 import React from 'react';
 
 import '../styles/Auth.scss';
-import Paper from 'material-ui/Paper';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
+import LoginForm from '../components/LoginForm';
 
 export default class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {}
+    }
+    this.onChange = (e) => {
+      const field = e.target.name;
+      const value = e.target.value;
+      this.state.user[field] = value;
+    }
+    this.onSubmit = (e) => {
+      e.preventDefault();
+      // Logic to handle Signup
+    }
+  }
+  
   render() {
     return (
-      <div className="auth-container">
-        <Paper>
-          <form>
-            <h1>Login</h1>
-            <div className="form-field">
-              <TextField 
-              floatingLabelText="Email"
-              fullWidth={ true }
-              />
-            </div>
-            <div className="form-field">
-              <TextField 
-              floatingLabelText="Password"
-              type="password"
-              fullWidth={ true }
-              />
-            </div>
-            <div className="form-field">
-              <RaisedButton className="signup-button" label="LOGIN"/>
-            </div>
-          </form>
-        </Paper>
-      </div>
+      <LoginForm 
+      onChange = { this.onChange }
+      onSubmit = { this.onSubmit }
+      />
     )
   }
 }

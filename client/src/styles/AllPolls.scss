@@ -1,6 +1,6 @@
-.dashboard {
+.polls-container {
   width: 100%;
-  &-welcome{
+  .polls-welcome{
     background-image: url('/assets/pattern.svg');
     text-align: center;
     color: white;
@@ -9,19 +9,11 @@
       padding-bottom: 20px;
       margin: 0;
     }
-    &--buttons {
+    .polls-welcome--buttons {
       padding-bottom: 30px;
       button:first-child {
         margin-right: 10px !important;
       }
     }
   }
-}
-
-.poll-area {
-  padding: 20px;
-}
-
-.poll-card {
-  margin-bottom: 20px;
 }

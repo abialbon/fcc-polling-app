@@ -25,7 +25,7 @@ module.exports = {
                       "targets": {
                         "browsers": ["Firefox > 55"]
                       }
-                    }], 'react'],
+                    }], 'react', 'stage-2'],
                     compact: false
                 }
             }
