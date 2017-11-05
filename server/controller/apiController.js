@@ -56,7 +56,8 @@ const createPoll = (req, res) => {
 
 const votePoll = (req, res) => {
   const pollID = req.params.id;
-  Poll.findById(pollID)
+  if (req.userid) {
+    Poll.findById(pollID)
     .then(poll => {
       if (!poll.votedUSers || poll.votedUsers.indexOf(req.userid) === -1) {
         Poll.update({ _id: pollID, "options._id": req.body.voteID },
@@ -74,6 +75,32 @@ const votePoll = (req, res) => {
     .catch(err => {
       res.send({ success: false, error: err.message })
     })
+  } else { // If the user is not authenticated
+    const userIP = req.headers['x-forwarded-for'] || 
+    req.connection.remoteAddress || 
+    req.socket.remoteAddress ||
+    (req.connection.socket ? req.connection.socket.remoteAddress : null);
+    Poll.findById(pollID)
+      .then(poll => {
+        if (!poll.votedIp || poll.votedIp.indexOf(userIP) === -1) {
+          Poll.update({ _id: pollID, "options._id": req.body.voteID },
+          { $inc: {"options.$.votes": 1},
+            $addToSet: { votedIp: userIP } },
+            (err, poll) => {
+              if(err) {
+                // TODO: handle the error
+                res.send({ success: false, error: err.message })
+              } else {
+                res.send({ success: true }).end();
+              }
+            }
+          )
+        } else {
+          res.send({ success: false, error: 'The IP has already voted' }).end()
+        }
+      })
+  }
+
 }
 
 const deletePoll = (req, res) => {

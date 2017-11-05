@@ -38,6 +38,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 
 
 const Routes = ({
+  appIP,
   user,
   authenticated,
   message,
@@ -71,7 +72,9 @@ const Routes = ({
 
   <Route exact path={'/addpoll'} component={ AddPoll } />
 
-  <Route exact path={'/poll/:id'} component={ Poll } />
+  <RouteData exact path={'/poll/:id'} component={ Poll } 
+  user={ user }
+  appIP={ appIP }/>
 
   </div>
 

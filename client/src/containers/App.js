@@ -11,6 +11,7 @@ class App extends React.Component {
     this.state = {
       user: {},
       authenticated: false,
+      appIP: '',
       message: {
         color: '',
         text: ''
@@ -67,12 +68,20 @@ class App extends React.Component {
         })
     } else {
       // TODO: handle this case !
+      request
+        .get('/api/getIP')
+        .end((err, res) => {
+          this.setState({
+            appIP: res.body.ip
+          })
+        })
     }
   }
 
   render() {
     return (
       <Routes 
+      appIP={ this.state.appIP }
       user={ this.state.user }
       authenticated={ this.state.authenticated }
       message={ this.state.message }

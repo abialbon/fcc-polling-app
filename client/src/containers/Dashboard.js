@@ -65,12 +65,12 @@ export default class Dashboard extends React.Component {
             <FlatButton 
             onClick={ () => this.props.history.push('/polls') }
             backgroundColor={ lightBlueA400 }
-            labelStyle={{ color: 'white'}} 
+            labelStyle={{ color: '#ffffff'}} 
             label="View all Polls"
             />
             <FlatButton 
             backgroundColor={ redA400 }
-            labelStyle={{ color: 'white'}} 
+            labelStyle={{ color: '#ffffff'}} 
             label="Add a new Poll" 
             onClick={ () => this.props.history.push('/addpoll') }
             />
