@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Auth from '../modules/clientAuth';
 import request from 'superagent';
 import PollCard from '../components/PollCard';
 
@@ -14,6 +15,26 @@ export default class AllPolls extends React.Component {
     this.state = {
       polls: []
     }
+    // Delete a user poll
+    this.deletePoll= (pollID, i) => {
+      const token = Auth.getToken();
+      request
+        .delete(`/api/polls/${ pollID }`)
+        .set('Authorization', `Bearer ${token}`)
+        .end((err, res) => {
+          if (err) {
+            // TODO: Handle the error
+          } else {
+            if (res.body.success) {
+              let tempPolls = this.state.polls;
+              tempPolls.splice(i, 1)
+              this.setState({
+                polls: tempPolls
+              })
+            }
+          }
+        })
+    } 
   }
 
   componentDidMount() {
@@ -56,10 +77,13 @@ export default class AllPolls extends React.Component {
             <PollCard 
             key={ i }
             name={ poll.authorName } 
+            author={ poll.author }
             stem={ poll.stem }
             pollID={ poll._id }
-            context="allpolls"
+            appUser={ this.props.user._id }
             history={ this.props.history }
+            deletePoll={ this.deletePoll }
+            index={ i } 
             />
           ))
           }

@@ -63,7 +63,8 @@ const Routes = ({
   userAuthenticate={ userAuthenticate }
   />
 
-  <Route exact path='/polls' component={ AllPolls } />
+  <RouteData exact path='/polls' component={ AllPolls } 
+  user={user}/>
 
   <PrivateRoute exact path='/dashboard' component={ Dashboard } 
   user={ user }/>

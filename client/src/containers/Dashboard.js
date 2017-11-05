@@ -19,7 +19,7 @@ export default class Dashboard extends React.Component {
     this.fetch =() => {
       const token = Auth.getToken();
       request
-        .get(`api/polls/user/${this.props.user._id}`)
+        .get(`/api/polls/user/${this.props.user._id}`)
         .set('Authorization', `Bearer ${token}`)
         .end((err, res) => {
           this.setState({
@@ -27,6 +27,27 @@ export default class Dashboard extends React.Component {
           })
         })
     }
+
+    // Delete a user poll
+    this.deletePoll= (pollID, i) => {
+      const token = Auth.getToken();
+      request
+        .delete(`/api/polls/${ pollID }`)
+        .set('Authorization', `Bearer ${token}`)
+        .end((err, res) => {
+          if (err) {
+            // TODO: Handle the error
+          } else {
+            if (res.body.success) {
+              let tempPolls = this.state.polls;
+              tempPolls.splice(i, 1)
+              this.setState({
+                polls: tempPolls
+              })
+            }
+          }
+        })
+    } 
   }
 
   componentDidMount() {
@@ -63,10 +84,14 @@ export default class Dashboard extends React.Component {
             this.state.polls.map((poll, i) => (
             <PollCard 
             key={ i }
+            author={ poll.author }
+            appUser={ this.props.user._id }
             history={ this.props.history }
             pollID={ poll._id }
             name={ poll.authorName } 
             stem={ poll.stem }
+            deletePoll={ this.deletePoll.bind(this) }
+            index={ i }
             />
           ))
           }

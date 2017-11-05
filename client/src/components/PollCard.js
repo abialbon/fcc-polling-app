@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, CardHeader, CardMedia, CardTitle, CardText, CardActions } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton';
 
-export default function PollCard ({ name, stem, context, pollID, history }) {
+export default function PollCard ({ author, name, stem, appUser, pollID, history, deletePoll, index }) {
   return (
   <Card className="poll-card">
     <CardHeader
@@ -21,7 +21,11 @@ export default function PollCard ({ name, stem, context, pollID, history }) {
       label="Vote"
       />
       {
-        context !== "allpolls" && <FlatButton label="Delete"/>
+        appUser === author && 
+        <FlatButton 
+        onClick={ () => deletePoll(pollID, index) }
+        label="Delete"
+        />
       }
     </CardActions>
   </Card>

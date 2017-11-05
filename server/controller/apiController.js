@@ -58,7 +58,7 @@ const votePoll = (req, res) => {
   const pollID = req.params.id;
   Poll.findById(pollID)
     .then(poll => {
-      if (!poll.votedUSers || poll.votedUSers.indexOf(req.userid) === -1) {
+      if (!poll.votedUSers || poll.votedUsers.indexOf(req.userid) === -1) {
         Poll.update({ _id: pollID, "options._id": req.body.voteID },
             { $inc: {"options.$.votes": 1},
               $addToSet: { votedUsers: req.userid } },
@@ -80,9 +80,13 @@ const deletePoll = (req, res) => {
   const pollID = req.params.id;
   Poll.findById(pollID)
     .then(poll => {
-      poll.remove()
-      .then(() => res.send({ success: true }))
-      .catch(err => res.send({ success: false, error: err.message }))
+      if (poll.author.equals(req.userid)) {
+        poll.remove()
+        .then(() => res.send({ success: true }))
+        .catch(err => res.send({ success: false, error: err.message }))
+      } else {
+        res.send({ success: false, error: 'You do not have the permission to delete this' })
+      }
     })
 }
 
