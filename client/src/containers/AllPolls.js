@@ -1,5 +1,6 @@
 import React from 'react';
 
+import request from 'superagent';
 import PollCard from '../components/PollCard';
 
 import '../styles/AllPolls.scss';
@@ -16,15 +17,19 @@ export default class AllPolls extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/data/allposts.json')
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          polls: data.data
-        });
+    request
+      .get('/api/polls')
+      .end((err, res) => {
+        if (err) {
+          // TODO: handle the error
+        } else {
+          if (res.body.success) {
+            this.setState({
+              polls: res.body.data
+            })
+          }
+        }
       })
-      .catch(err => console.log(err.message))
-
   }
 
   render() {
@@ -50,9 +55,11 @@ export default class AllPolls extends React.Component {
             this.state.polls.map((poll, i) => (
             <PollCard 
             key={ i }
-            name={ poll.author } 
+            name={ poll.authorName } 
             stem={ poll.stem }
+            pollID={ poll._id }
             context="allpolls"
+            history={ this.props.history }
             />
           ))
           }
