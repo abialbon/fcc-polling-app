@@ -10,13 +10,24 @@ class LandingPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      options: [undefined, 'B', 'C'],
+      options: ['A', 'B', 'C'],
       numbers: [10, 4, 6]
     }
   }
 
   componentDidMount() {
+    function randomNumArray() {
+      let a = [];
+      for (let i = 0; i < 3; i++) {
+        let r = Math.ceil(Math.random() * 20);
+        a.push(r);
+      }
+      return a;
+    }
 
+    setInterval(() => this.setState({
+      numbers: randomNumArray()
+    }), 2000)
   }
 
   render() {
@@ -25,6 +36,7 @@ class LandingPage extends React.Component {
         <div className="landing-container">
           <h1>Ask your next big question!</h1>
           <div className="landing-chart">
+            <Pie options={ this.state.options } votes={ this.state.numbers } /> 
           </div>
           <div className="landing-buttons">
             {

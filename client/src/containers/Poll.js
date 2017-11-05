@@ -118,7 +118,7 @@ export default class Poll extends React.Component {
         avatar="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png"
         />
         <CardMedia>
-          <Pie options={ this.state.pollOptions } votes={ this.state.pollVotes } />
+          <Pie label={ true } options={ this.state.pollOptions } votes={ this.state.pollVotes } />
         </CardMedia>
         <CardTitle title={ this.state.stem } />
         <CardText>
