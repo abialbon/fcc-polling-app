@@ -135,6 +135,11 @@ export default class Poll extends React.Component {
             backgroundColor={ lightBlueA400 }
             onClick={ this.onVote }
             />
+            {
+              !this.state.voteEligibility &&
+              <span> You have voted already </span>
+            }
+            
           </form>
         </CardText>
       </Card>

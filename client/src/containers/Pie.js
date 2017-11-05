@@ -1,6 +1,25 @@
 import React from 'react';
 const Chart = require('chart.js');
 
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
 // Colors for the pie chart
 const colors = ['#F44336', '#9C27B0', '#2196F3', 
 '#3F51B5', '#03A9F4', '#00BCD4', '#009688', '#1DE9B6', 
@@ -20,7 +39,7 @@ export default class Pie extends React.Component {
     const pieData = {
       datasets: [{
           data: votes,
-          backgroundColor: colors
+          backgroundColor: shuffle(colors)
       }],
       labels: options,
     }

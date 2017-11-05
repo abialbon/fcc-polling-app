@@ -79,6 +79,11 @@ export default class Dashboard extends React.Component {
         <Paper className="poll-area">
         <h2>Your polls</h2>
           {
+            this.state.polls.length === 0 &&
+            <span>You haven't added any polls yet</span>
+          }
+
+          {
             this.state.polls &&
 
             this.state.polls.map((poll, i) => (

@@ -5,7 +5,7 @@ import { Route, Redirect } from 'react-router-dom';
 import Auth from '../modules/clientAuth';
 
 import Header from './Header';
-import LandingPage from './LandingPage';
+import LandingPage from '../containers/LandingPage';
 
 import Signup from '../containers/Signup';
 import Login from '../containers/Login';
@@ -53,7 +53,8 @@ const Routes = ({
   logout={ logout }
   />
 
-  <Route exact path='/' component={ LandingPage } />
+  <RouteData exact path='/' component={ LandingPage } 
+  authenticated={ authenticated }/>
 
   <RouteData exact path='/signup' component={ Signup } setMessage={ setMessage }/>
   

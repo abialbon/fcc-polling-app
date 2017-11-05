@@ -58,18 +58,24 @@ export default class AllPolls extends React.Component {
       <div className="polls-container">
         <div className="polls-welcome">
           <h1>All Polls</h1>
-          <div className="polls-welcome--buttons">
-            <FlatButton 
-            backgroundColor={ lightBlueA400 }
-            labelStyle={{ color: 'white'}} 
-            label="Signup"
-            />
-            <FlatButton 
-            backgroundColor={ redA400 }
-            labelStyle={{ color: 'white'}} 
-            label="Login" 
-            />
-          </div>
+          {
+            !Auth.isAuthenticated() &&
+
+            <div className="polls-welcome--buttons">
+              <FlatButton 
+              backgroundColor={ lightBlueA400 }
+              labelStyle={{ color: 'white'}} 
+              label="Signup"
+              onClick={ () => this.props.history.push('/signup') }
+              />
+              <FlatButton 
+              backgroundColor={ redA400 }
+              labelStyle={{ color: 'white'}} 
+              label="Login"
+              onClick={ () => this.props.history.push('/login') }
+              />
+            </div>
+          }
         </div>
         <Paper className="poll-area">
           {
