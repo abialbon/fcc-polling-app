@@ -15,18 +15,24 @@ export default class Dashboard extends React.Component {
     this.state = {
       polls: []
     }
+
+    this.fetch =() => {
+      const token = Auth.getToken();
+      request
+        .get(`api/polls/user/${this.props.user._id}`)
+        .set('Authorization', `Bearer ${token}`)
+        .end((err, res) => {
+          this.setState({
+            polls: res.body.data
+          })
+        })
+    }
   }
 
   componentDidMount() {
-    const token = Auth.getToken();
-    request
-      .get(`api/polls/user/${this.props.user._id}`)
-      .set('Authorization', `Bearer ${token}`)
-      .end((err, res) => {
-        this.setState({
-          polls: res.body.data
-        })
-      })
+    if (this.props.user._id) {
+      this.fetch();
+    }
   }
 
   render() {
@@ -52,6 +58,8 @@ export default class Dashboard extends React.Component {
         <Paper className="poll-area">
         <h2>Your polls</h2>
           {
+            this.state.polls &&
+
             this.state.polls.map((poll, i) => (
             <PollCard 
             key={ i }

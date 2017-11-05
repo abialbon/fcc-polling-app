@@ -5,6 +5,9 @@ const authCheck = require('../middleware/authCheck');
 
 router.get('/polls', apiController.getAllPolls);
 router.get('/polls/:id', apiController.showAPoll);
+router.get('/validate', authCheck, (req, res) => {
+  res.send({ success: true, user: { _id: req.userid, name: req.username } });
+})
 
 router.get('/polls/user/:user', authCheck, apiController.showUserPolls);
 router.post('/polls', authCheck, apiController.createPoll);

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import request from 'superagent';
+
 import Routes from '../components/Routes';
 import Auth from '../modules/clientAuth';
 
@@ -40,6 +42,31 @@ class App extends React.Component {
           text: message.text
         }
       });
+    }
+  }
+
+  componentDidMount() {
+    if (Auth.isAuthenticated()) {
+      const token = Auth.getToken();
+      request
+        .get('/api/validate')
+        .set('Authorization', `Bearer ${token}`)
+        .end((err, res) => {
+          if(err) {
+            localStorage.setItem('app_token', 'null');
+          }
+          if (!err) {
+            this.setState({
+              authenticated: true,
+              user: {
+                _id: res.body.user._id,
+                name: res.body.user.name
+              }
+            })
+          }
+        })
+    } else {
+      // TODO: handle this case !
     }
   }
 
