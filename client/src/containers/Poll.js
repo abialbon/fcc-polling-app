@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { events } from './App';
+import $ from 'jquery';
+
 import Auth from '../modules/clientAuth';
 import request from 'superagent';
 import Pie from './Pie';
@@ -64,10 +67,9 @@ export default class Poll extends React.Component {
         .send({ voteID: this.state.voteSelection })
         .end((err, res) => {
           if (err) {
-            // TODO: handle the error
-            console.log(err.message);
+            $(events).trigger('snack', ['Some problem occured!'])
           } else {
-            console.log(res.body);
+            $(events).trigger('snack', ['Vote registered !'])
             tempVotes[voteIndex] = voteIncrement;
             this.setState({
               pollVotes: tempVotes,
@@ -85,7 +87,7 @@ export default class Poll extends React.Component {
       .get(`/api/polls/${pollID}`)
       .end((err, res) => {
         if (err) {
-          // TODO: handle the error
+          $(events).trigger('snack', ['Error: Please refresh the page'])
         } else {
           let { data } = res.body;
           let { _id, author, authorName, options, stem, votedUsers, votedIp  } = data;

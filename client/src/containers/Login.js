@@ -1,6 +1,8 @@
 import React from 'react';
 const request = require('superagent');
 import Auth from '../modules/clientAuth';
+import { events } from '../containers/App';
+import $ from 'jquery';
 
 import '../styles/Auth.scss';
 import LoginForm from '../components/LoginForm';
@@ -33,6 +35,7 @@ export default class Login extends React.Component {
             Auth.authenticate(res.body.token);
             this.props.userAuthenticate(res.body.user);
             this.props.history.push('/dashboard');
+            $(events).trigger('snack', ['Logged in successfully!']);
           }
         })
     }

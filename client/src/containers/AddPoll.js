@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { events } from './App';
+import $ from 'jquery';
 import Auth from '../modules/clientAuth';
 const request = require('superagent');
 
@@ -38,8 +40,9 @@ class AddPoll extends React.Component {
         .send(this.state.form)
         .end((err, res) => {
           if (res.body.success === false) {
-            // TODO: Handle the error
+            $(events).trigger('snack', ['Please login'])
           } else {
+            $(events).trigger('snack', ['Poll added !'])
             this.props.history.push('/dashboard');
           }
         })

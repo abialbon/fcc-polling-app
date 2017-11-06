@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { events } from './App';
+import $ from 'jquery';
+
 const request = require('superagent');
 import Auth from '../modules/clientAuth';
 import PollCard from '../components/PollCard';
@@ -36,9 +39,10 @@ export default class Dashboard extends React.Component {
         .set('Authorization', `Bearer ${token}`)
         .end((err, res) => {
           if (err) {
-            // TODO: Handle the error
+            $(events).trigger('snack', ['Some problem occured !'])
           } else {
             if (res.body.success) {
+              $(events).trigger('snack', ['Poll deleted !'])
               let tempPolls = this.state.polls;
               tempPolls.splice(i, 1)
               this.setState({

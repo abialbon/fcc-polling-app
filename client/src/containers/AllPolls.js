@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { events } from './App';
+import $ from 'jquery';
+
 import Auth from '../modules/clientAuth';
 import request from 'superagent';
 import PollCard from '../components/PollCard';
@@ -23,9 +26,10 @@ export default class AllPolls extends React.Component {
         .set('Authorization', `Bearer ${token}`)
         .end((err, res) => {
           if (err) {
-            // TODO: Handle the error
+            $(events).trigger('snack', ['Some problem occured !'])
           } else {
             if (res.body.success) {
+              $(events).trigger('snack', ['Poll deleted !'])
               let tempPolls = this.state.polls;
               tempPolls.splice(i, 1)
               this.setState({
@@ -42,7 +46,7 @@ export default class AllPolls extends React.Component {
       .get('/api/polls')
       .end((err, res) => {
         if (err) {
-          // TODO: handle the error
+          $(events).trigger('snack', ['Error: Please refresh the page'])
         } else {
           if (res.body.success) {
             this.setState({

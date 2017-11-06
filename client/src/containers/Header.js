@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import '../styles/Header.scss';
 import AppBar from 'material-ui/AppBar';
@@ -25,6 +24,10 @@ class Header extends React.Component {
       open={ this.state.open }
       onRequestChange={ (open) => this.setState({ open }) }
       >
+
+      <MenuItem onClick={() => {this.props.history.push('/polls'); this.handleClose()} }>All Polls</MenuItem>
+      <hr />
+
       { !this.props.authenticated && 
         <MenuItem onClick={() => {this.props.history.push('/signup'); this.handleClose()} }>Signup</MenuItem>
       }
