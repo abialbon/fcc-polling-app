@@ -6,7 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 const LoginForm = ({ onChange, onSubmit, message }) => (
   <div className="auth-container">
-    <Paper>
+    <Paper className="form-container">
       <form action="/" method="POST" onSubmit={ onSubmit }>
         <h1>Login</h1>
         {

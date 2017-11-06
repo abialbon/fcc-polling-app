@@ -28,3 +28,21 @@
 .poll-card {
   margin-bottom: 20px;
 }
+
+@media (max-width: 500px) {
+  .poll-area {
+    width: 96%;
+    padding: 10px;
+  }
+  .poll-title {
+    span {
+      font-size: 1.25em !important;
+    }
+  }
+}
+
+@media (min-width: 900px) {
+  .poll-area {
+    width: 50%;
+  }
+}

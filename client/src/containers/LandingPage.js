@@ -11,7 +11,8 @@ class LandingPage extends React.Component {
     super(props);
     this.state = {
       options: ['A', 'B', 'C'],
-      numbers: [10, 4, 6]
+      numbers: [10, 4, 6],
+      timer: 0
     }
   }
 
@@ -25,9 +26,13 @@ class LandingPage extends React.Component {
       return a;
     }
 
-    setInterval(() => this.setState({
+    this.state.timer = setInterval(() => this.setState({
       numbers: randomNumArray()
     }), 2000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.timer);
   }
 
   render() {

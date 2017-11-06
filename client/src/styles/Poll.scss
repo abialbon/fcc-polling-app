@@ -9,3 +9,15 @@
     margin-left: 10px !important;
   }
 }
+
+@media (max-width: 500px) {
+  .poll-container {
+    width: 96%;
+  }
+}
+
+@media (min-width: 900px) {
+  .poll-container {
+    width: 50%;
+  }
+}

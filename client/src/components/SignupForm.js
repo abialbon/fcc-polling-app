@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const SignupForm = ({ onChange, onSubmit, errors }) => (
-  <Paper>
+  <Paper className="form-container">
   <form method="POST" action="/" onSubmit={ onSubmit } >
     <h1>Welcome to PollAce</h1>
     <div className="form-field">

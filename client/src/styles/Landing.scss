@@ -10,20 +10,36 @@
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    width: 70%;
+    width: 60%;
     h1 {
       text-align: center;
       color: white;
     }
   }
   &-chart {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
   &-buttons {
     display: flex;
     justify-content: center;
     button:first-child {
       margin-right: 10px !important;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .landing {
+    &-container {
+      width: 98%;
+    }
+  }
+}
+
+@media (min-width: 900px) {
+  .landing {
+    &-container {
+      width: 40%;
     }
   }
 }

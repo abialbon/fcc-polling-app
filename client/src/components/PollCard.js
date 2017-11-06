@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { Card, CardHeader, CardMedia, CardTitle, CardText, CardActions } from 'material-ui/Card'
+import { Card, CardHeader, CardTitle, CardText, CardActions } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton';
+import { lightBlueA400, redA400 } from 'material-ui/styles/colors';
 
 export default function PollCard ({ author, name, stem, appUser, pollID, history, deletePoll, index }) {
   return (
@@ -11,18 +12,19 @@ export default function PollCard ({ author, name, stem, appUser, pollID, history
     subtitle="A PollAce User"
     avatar="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png"
     />
-    <CardMedia>
-      
-    </CardMedia>
-    <CardTitle title={ stem } />
+    <CardTitle className="poll-title" title={ stem } />
     <CardActions>
       <FlatButton
+      labelStyle={{ color: '#ffffff' }}
+      backgroundColor={ lightBlueA400 }
       onClick={ () => history.push(`/poll/${pollID}`) } 
       label="Vote"
       />
       {
         appUser === author && 
         <FlatButton 
+        labelStyle={{ color: '#ffffff' }}
+        backgroundColor={ redA400 }
         onClick={ () => deletePoll(pollID, index) }
         label="Delete"
         />

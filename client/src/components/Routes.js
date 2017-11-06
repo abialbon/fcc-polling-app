@@ -4,7 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 import Auth from '../modules/clientAuth';
 
-import Header from './Header';
+import Header from '../containers/Header';
 import LandingPage from '../containers/LandingPage';
 
 import Signup from '../containers/Signup';
