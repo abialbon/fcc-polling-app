@@ -11,7 +11,8 @@ import '../styles/Poll.scss';
 import { Card, CardHeader, CardMedia, CardTitle, CardText, CardActions } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
-import { lightBlueA400, redA400 } from 'material-ui/styles/colors';
+import Share from 'material-ui/svg-icons/social/share';
+import { lightBlueA400, redA400, fullWhite } from 'material-ui/styles/colors';
 
 export default class Poll extends React.Component {
   constructor(props) {
@@ -144,6 +145,16 @@ export default class Poll extends React.Component {
             
           </form>
         </CardText>
+        <CardActions>
+          <FlatButton
+            label="Tweet"
+            labelPosition="before"
+            labelStyle={{ color: '#ffffff' }}
+            backgroundColor={ lightBlueA400 }
+            icon={ <Share color={fullWhite} /> }
+            href={ `https://twitter.com/intent/tweet?url=${window.location}&hashtags=PollAce` }
+          />
+        </CardActions>
       </Card>
       </div>
     )
