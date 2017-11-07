@@ -4,7 +4,7 @@
   "description": "A polling app for FreeCodeCamp",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/nodemon/bin/nodemon.js index.js",
+    "start": "node index.js",
     "test": "./node_modules/mocha/bin/mocha --recursive -R min"
   },
   "repository": {
