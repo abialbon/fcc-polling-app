@@ -59,7 +59,7 @@ const votePoll = (req, res) => {
   if (req.userid) {
     Poll.findById(pollID)
     .then(poll => {
-      if (!poll.votedUSers || poll.votedUsers.indexOf(req.userid) === -1) {
+      if (!poll.votedUsers || poll.votedUsers.indexOf(req.userid) === -1) {
         Poll.update({ _id: pollID, "options._id": req.body.voteID },
             { $inc: {"options.$.votes": 1},
               $addToSet: { votedUsers: req.userid } },
@@ -80,6 +80,7 @@ const votePoll = (req, res) => {
     req.connection.remoteAddress || 
     req.socket.remoteAddress ||
     (req.connection.socket ? req.connection.socket.remoteAddress : null);
+    console.log(userIP);
     Poll.findById(pollID)
       .then(poll => {
         if (!poll.votedIp || poll.votedIp.indexOf(userIP) === -1) {
