@@ -43,7 +43,6 @@ export default class Poll extends React.Component {
       snack: ''
     }
     this.checkVoteEligibility = (user, appIP) => {
-      console.log(user, appIP);
       let eligibility;
       let eligibilityMessage = '';
       if (user._id && this.state.votedUsers.indexOf(user._id) !== -1) {
@@ -63,7 +62,6 @@ export default class Poll extends React.Component {
 
     this.grabPoll = () => {
       const pollID = this.props.match.params.id;
-      
           request
             .get(`/api/polls/${pollID}`)
             .end((err, res) => {
@@ -200,7 +198,6 @@ export default class Poll extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('update ran');
     this.setState({
       appUserID: nextProps.user._id,
       appIP: nextProps.appIP
@@ -213,7 +210,6 @@ export default class Poll extends React.Component {
   }
 
   render() {
-    console.log('render ran');
     const actions = [
       <FlatButton
         label="Cancel"

@@ -71,7 +71,7 @@ const Routes = ({
   <PrivateRoute exact path='/dashboard' component={ Dashboard } 
   user={ user }/>
 
-  <Route exact path={'/addpoll'} component={ AddPoll } />
+  <PrivateRoute exact path={'/addpoll'} component={ AddPoll } />
 
   <RouteData exact path={'/poll/:id'} component={ Poll } 
   user={ user }
