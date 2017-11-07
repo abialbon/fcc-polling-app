@@ -121,13 +121,20 @@ const addOption = (req, res) => {
   // Receives an option as req.body.option
   const pollID = req.params.id;
   const newOption = req.body.option;
-  Poll.update({ _id: pollID },
-    { $addToSet: { options: { option: newOption } } })
-    .then(() => {
-      res.send({ success: true }).end();
-    })
-    .catch(err => {
-      res.send({ success: false, error: err.message }).end()
+  Poll.findById(pollID)
+    .then(poll => {
+      if (poll.author.equals(req.userid)) {
+        Poll.update({ _id: pollID },
+          { $addToSet: { options: { option: newOption } } })
+          .then(() => {
+            res.send({ success: true }).end();
+          })
+          .catch(err => {
+            res.send({ success: false, error: err.message }).end()
+          })
+      } else {
+        res.send({ success: false, error: 'You are not permitted to add options to this poll' })
+      }
     })
 }
 

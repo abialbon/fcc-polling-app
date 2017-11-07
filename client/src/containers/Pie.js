@@ -14,9 +14,9 @@ function shuffle(array) {
 }
 
 // Colors for the pie chart
-const colors = ['#F44336', '#9C27B0', '#2196F3', 
-'#3F51B5', '#03A9F4', '#00BCD4', '#009688',
-'#00E676', '#FFEB3B', '#FFC107', '#FF9800', '#607D8B'];
+const colors = ['#F44336', '#E91E63', '#9C27B0', 
+'#673AB7', '#03A9F4', '#00BCD4', '#009688', 
+'#8BC34A', '#FFEB38', '#FF9800', '#FF5722', '#795548'];
 
 export default class Pie extends React.Component {
   constructor(props) {
