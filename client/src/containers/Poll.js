@@ -48,7 +48,13 @@ export default class Poll extends React.Component {
       if (user._id && this.state.votedUsers.indexOf(user._id) !== -1) {
         eligibility = false;
         eligibilityMessage = 'You have already voted'
-      } else if (appIP && this.state.votedIp.indexOf(appIP) !== -1) {
+        this.setState({
+          voteEligibility: eligibility,
+          voteEligibilityMessage: eligibilityMessage
+        });
+        return;
+      } 
+      if (appIP && this.state.votedIp.indexOf(appIP) !== -1) {
         eligibility = false;
         eligibilityMessage = 'This IP has already voted'
       } else {
@@ -62,6 +68,7 @@ export default class Poll extends React.Component {
 
     this.grabPoll = () => {
       const pollID = this.props.match.params.id;
+      console.log('Poll grab')
           request
             .get(`/api/polls/${pollID}`)
             .end((err, res) => {
@@ -121,12 +128,12 @@ export default class Poll extends React.Component {
           if (err) {
             $(events).trigger('snack', ['Some problem occured!'])
           } else {
-            $(events).trigger('snack', ['Vote registered !'])
-            tempVotes[voteIndex] = voteIncrement;
-            this.setState({
-              pollVotes: tempVotes,
-              voteEligibility: false
-            })
+            if (res.body.success === true) {
+              this.grabPoll();
+              $(events).trigger('snack', ['Vote registered !'])
+            } else {
+              $(events).trigger('snack', ["You can't vote"])
+            }
           }
         })
     }
