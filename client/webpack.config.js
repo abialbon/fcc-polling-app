@@ -21,12 +21,8 @@ module.exports = {
             {
                 loader: 'babel-loader',
                 options: {
-                    presets: [["env", {
-                      "targets": {
-                        "browsers": ["Firefox > 55"]
-                      }
-                    }], 'react', 'stage-2'],
-                    compact: false
+                    presets: [["env"], 'react', 'stage-2'],
+                    compact: true
                 }
             }
         ]
